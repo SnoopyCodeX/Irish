@@ -16,7 +16,7 @@ bot.on("authentication", (payload, chat) => {
   chat.getUserProfile().then(user => {
     // Send options to user
     chat.say({
-      text: `Hi ${user.name}, how may I help you?`,
+      text: `Hi ${user.first_name}, how may I help you?`,
       buttons: [
         {type: "postback", title: "Solve Math", payload: "SOLVE_MATH"},
         {type: "postback", title: "Search Image", payload: "SEARCH_IMAGE"},
@@ -27,6 +27,13 @@ bot.on("authentication", (payload, chat) => {
     });
   });
 });
+
+bot.on("message", (payload, chat) => {
+  chat.getUserProfile().then(user => {
+    chat.say(`Hey there ${user.first_name}!`);
+  })
+})
+
 /*
 // User clicked "Solve Math" button
 bot.on("postback:SOLVE_MATH", commands.math);
