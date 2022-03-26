@@ -12,33 +12,34 @@ const bot = new BootBot({
 
 const disableInput = false;
 
-bot.setGetStartedButton("Get Started");
+bot.setGreetingText("Hey there! My name is, Irish.")
+bot.setGetStartedButton((payload, chat) => {
+  chat.getUserProfile().then(user => {
+    chat.say(`Hello ${user.first_name}! What would you like to do?`);
+  });
+});
+
 bot.setPersistentMenu([
   {
-    title: 'My Account',
+    title: 'My Options',
     type: 'nested',
     call_to_actions: [
       {
-        title: 'Pay Bill',
+        title: 'Search Image',
         type: 'postback',
-        payload: 'PAYBILL_PAYLOAD'
+        payload: 'SEARCH_IMAGE'
       },
       {
-        title: 'History',
+        title: 'Google Search',
         type: 'postback',
-        payload: 'HISTORY_PAYLOAD'
+        payload: 'SEARCH_GOOGLE'
       },
       {
-        title: 'Contact Info',
+        title: 'Solve Math',
         type: 'postback',
-        payload: 'CONTACT_INFO_PAYLOAD'
+        payload: 'SOLVE_MATH'
       }
     ]
-  },
-  {
-    title: 'Go to Website',
-    type: 'web_url',
-    url: 'http://purple.com'
   }
 ], disableInput);
 
