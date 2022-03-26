@@ -11,22 +11,67 @@ const bot = new BootBot({
 });
 
 // When user starts a convo using "Send to messenger" button
-bot.hear(["hey"], (payload, chat) => {
-  // Get user profile
-  chat.getUserProfile().then(user => {
-    // Send options to user
-    chat.say({
-      text: `Hi ${user.first_name}, how may I help you?`,
-      buttons: [
-        {type: "postback", title: "Solve Math", payload: "SOLVE_MATH"},
-        {type: "postback", title: "Search Image", payload: "SEARCH_IMAGE"},
-        {type: "postback", title: "Google Search", payload: "SEARCH_GOOGLE"},
-        {type: "postback", title: "Define Word", payload: "DEFINE_WORD"},
-        {type: "postback", title: "Wiki Search", payload: "SEARCH_WIKI"},
+bot.on("authentication", (payload, chat) => {
+  bot.setPersistentMenu([
+    {
+      title: 'My Account',
+      type: 'nested',
+      call_to_actions: [
+        {
+          title: 'Pay Bill',
+          type: 'postback',
+          payload: 'PAYBILL_PAYLOAD'
+        },
+        {
+          title: 'History',
+          type: 'postback',
+          payload: 'HISTORY_PAYLOAD'
+        },
+        {
+          title: 'Contact Info',
+          type: 'postback',
+          payload: 'CONTACT_INFO_PAYLOAD'
+        }
       ]
-    });
-  });
+    },
+    {
+      title: 'Go to Website',
+      type: 'web_url',
+      url: 'http://purple.com'
+    }
+  ], disableInput);
 });
+
+bot.on("referral", (payload, chat) => {
+  bot.setPersistentMenu([
+    {
+      title: 'My Account',
+      type: 'nested',
+      call_to_actions: [
+        {
+          title: 'Pay Bill',
+          type: 'postback',
+          payload: 'PAYBILL_PAYLOAD'
+        },
+        {
+          title: 'History',
+          type: 'postback',
+          payload: 'HISTORY_PAYLOAD'
+        },
+        {
+          title: 'Contact Info',
+          type: 'postback',
+          payload: 'CONTACT_INFO_PAYLOAD'
+        }
+      ]
+    },
+    {
+      title: 'Go to Website',
+      type: 'web_url',
+      url: 'http://purple.com'
+    }
+  ], disableInput);
+})
 
 /*
 // User clicked "Solve Math" button
