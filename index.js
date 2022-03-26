@@ -21,25 +21,19 @@ bot.setGetStartedButton((payload, chat) => {
 
 bot.setPersistentMenu([
   {
-    title: 'My Options',
-    type: 'nested',
-    call_to_actions: [
-      {
-        title: 'Search Image',
-        type: 'postback',
-        payload: 'SEARCH_IMAGE'
-      },
-      {
-        title: 'Google Search',
-        type: 'postback',
-        payload: 'SEARCH_GOOGLE'
-      },
-      {
-        title: 'Solve Math',
-        type: 'postback',
-        payload: 'SOLVE_MATH'
-      }
-    ]
+    title: 'Search Image',
+    type: 'postback',
+    payload: 'SEARCH_IMAGE'
+  },
+  {
+    title: 'Google Search',
+    type: 'postback',
+    payload: 'SEARCH_GOOGLE'
+  },
+  {
+    title: 'Solve Math',
+    type: 'postback',
+    payload: 'SOLVE_MATH'
   }
 ], disableInput);
 
