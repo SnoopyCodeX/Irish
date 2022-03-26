@@ -10,6 +10,8 @@ const bot = new BootBot({
   appSecret: process.env.SECRET
 });
 
+const disableInput = false;
+
 // When user starts a convo using "Send to messenger" button
 bot.on("authentication", (payload, chat) => {
   bot.setPersistentMenu([
