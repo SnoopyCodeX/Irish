@@ -12,6 +12,7 @@ const bot = new BootBot({
 
 const disableInput = false;
 
+bot.setGetStartedButton("Get Started");
 bot.setPersistentMenu([
   {
     title: 'My Account',
