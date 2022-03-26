@@ -37,4 +37,5 @@ bot.on("postback:SEARCH_IMAGE", commands.searchImage);
 // User clicked "Search Google" button
 bot.on("postback:SEARCH_GOOGLE", commands.searchGoogle);
 */
-bot.start();
+
+bot.start(process.env.PORT || 8080);
