@@ -1,0 +1,41 @@
+{
+  "name": "irish",
+  "version": "1.0.0",
+  "description": "Irish is a messenger chatbot that's the sole purpose is to be of help to the students that does not have any load for searching.",
+  "main": "index.js",
+  "engines": {
+    "node": "17.4.0",
+    "npm": "8.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js",
+    "dev": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SnoopyCodeX/Irish.git"
+  },
+  "keywords": [
+    "chatbot",
+    "messenger",
+    "page",
+    "facebook",
+    "student",
+    "helper",
+    "free data",
+    "nodejs",
+    "api",
+    "bot",
+    "chat"
+  ],
+  "author": "SnoopyCodeX",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "better-bootbot": "^1.1.2",
+    "cloudscraper": "^4.6.0",
+    "dotenv": "^16.0.0",
+    "googlethis": "^1.2.7"
+  }
+}
