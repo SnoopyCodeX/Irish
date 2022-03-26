@@ -11,7 +11,7 @@ const bot = new BootBot({
 });
 
 // When user starts a convo using "Send to messenger" button
-bot.on("authentication", (payload, chat) => {
+bot.hear(["hey"], (payload, chat) => {
   // Get user profile
   chat.getUserProfile().then(user => {
     // Send options to user
@@ -27,12 +27,6 @@ bot.on("authentication", (payload, chat) => {
     });
   });
 });
-
-bot.on("message", (payload, chat) => {
-  chat.getUserProfile().then(user => {
-    chat.say(`Hey there ${user.first_name}!`);
-  })
-})
 
 /*
 // User clicked "Solve Math" button
