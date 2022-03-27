@@ -1,6 +1,17 @@
 const BootBot = require("better-bootbot");
 const dotenv = require("dotenv");
 const commands = require("./commands/all");
+
+// Hard-coded for now.
+commands.names = [
+  'About Me',
+  'Solve Math',
+  'Search Image'
+  'Search Google',
+  'Search Wiki',
+  'Define Word'
+];
+
 dotenv.config();
 
 // Initialize bot
@@ -10,19 +21,12 @@ const bot = new BootBot({
   appSecret: process.env.SECRET
 });
 
-const disableInput = false;
-
-bot.setGreetingText("Hey there! My name is, Irish.")
+bot.setGreetingText("Hey there! My name is, Irish. I am a student-friendly chatbot whose sole-purpose is to be of help to all the students that does not have internet for their homeworks/activities.")
 bot.setGetStartedButton((payload, chat) => {
   chat.getUserProfile().then(user => {
     chat.say({
       text: `Hello ${user.first_name}! What would you like to do?`,
-      quickReplies: [
-        'Solve Math', 
-        'Search Google',
-        'Search Wiki',
-        'Search Image'
-      ]
+      quickReplies: commands.names
     });
     bot.deletePersistentMenu();
   });
@@ -35,31 +39,18 @@ bot.on("authentication", (payload, chat) => {
 
 bot.on("referral", (payload, chat) => {
   console.log(payload);
-  bot.deletePersistentMenu();
-  chat.say("Welcome back! What would you like to do today?");
+  
+  chat.getUserProfile().then(user => {
+    chat.say({
+      text: `Welcome back, ${user.first_name}! What would you like to do?`,
+      quickReplies: commands.names
+    });
+  });
 })
 
-bot.hear("test", (payload, chat) => {
-  console.log(payload);
-  bot.deletePersistentMenu();
-  chat.say("Received a test message!");
+bot.on('quick_reply', (payload, chat) => {
+  console.log(payload)
+  chat.say(`Received ${payload.quick_reply}`)
 });
-
-bot.on('quick_reply', (payload, chat, data) => {
-  console.log(payload);
-  console.log(data);
-  chat.say('Received quick reply');
-});
-
-/*
-// User clicked "Solve Math" button
-bot.on("postback:SOLVE_MATH", commands.math);
-
-// User clicked "Search Image" button
-bot.on("postback:SEARCH_IMAGE", commands.searchImage);
-
-// User clicked "Search Google" button
-bot.on("postback:SEARCH_GOOGLE", commands.searchGoogle);
-*/
 
 bot.start(process.env.PORT || 8080);
