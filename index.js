@@ -4,17 +4,6 @@ const commands = require("./commands/all");
 const convoUtils = require("./utils/convoUtils");
 dotenv.config();
 
-// Hard-coded for now
-/*commands.names = [
-  'About Me',
-  'Solve Math',
-  'Search Image',
-  'Search Google',
-  'Search Wiki',
-  'Define Word'
-];*/
-
-
 // Initialize bot
 const bot = new BootBot({
   accessToken: process.env.ACCESS_TOKEN,
@@ -25,8 +14,10 @@ const bot = new BootBot({
 bot.deleteGetStartedButton();
 bot.deletePersistentMenu();
 
-bot.setGreetingText("Hey there! My name is, Irish. I am a student-friendly chatbot whose sole-purpose is to be of help to all the students that does not have internet for their homeworks/activities.")
+bot.setGreetingText("Hey there! My name is, Elvie. I am a student-friendly chatbot whose sole-purpose is to be of help to all the students that does not have internet for their homeworks/activities.")
 bot.setGetStartedButton((payload, chat) => {
+  console.log(payload);
+  
   chat.getUserProfile().then(user => {
     chat.say({
       text: `Hello ${user.first_name}! What would you like to do?`,
@@ -60,6 +51,7 @@ bot.on("referral", (payload, chat) => {
 });
 
 bot.on("message", (payload, chat) => {
+  console.log(payload);
   let senderID = payload.sender.id;
   let convoRecords = convoUtils.openConvoRecords();
   
@@ -78,7 +70,7 @@ bot.on('quick_reply', (payload, chat) => {
   let senderID = payload.sender.id;
   let convoRecords = convoUtils.openConvoRecords();
   
-  if(payload.message.quick_reply === "PAYLOAD_QR_EXITTHISCOMMAND") {
+  if(payload.message.quick_reply === "BOOTBOT_QR_EXITTHISCOMMAND") {
     delete convoRecords[senderID];
     convoUtils.saveConvoRecords(convoRecords);
     
@@ -99,13 +91,13 @@ bot.on('quick_reply', (payload, chat) => {
     if(command === 'names') continue;
     
     // Get their payload tags (QR = Quick Reply)
-    let cmdTagQR = `PAYLOAD_QR_${commands[command].name.replace(/\s/g, '').toUpperCase()}`;
+    let cmdTagQR = `BOOTBOT_QR_${commands[command].name.replace(/\s/g, '').toUpperCase()}`;
     let curTagQR = payload.message.quick_reply;
     
     // If their tags matches
     if(cmdTagQR === curTagQR) {
       // Execute command callback
-      commands[command].callback(bot, payload, chat);
+      commands[command].callback(payload, chat);
       
       // Store selected command
       convoRecords[senderID]['selectedCommand'] = commands[command];

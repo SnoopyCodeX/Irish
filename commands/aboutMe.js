@@ -1,9 +1,8 @@
 const callback = (payload, chat) => {
   chat.say({
     text:'I am a chatbot',
-    quickReplies: ['Show Menu']
+    quickReplies: ['Exit this command']
   });
-  
 };
 
 module.exports = {
