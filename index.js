@@ -21,6 +21,9 @@ const bot = new BootBot({
   appSecret: process.env.SECRET
 });
 
+bot.deletePersistentMenu();
+bot.deleteGetStartedButton();
+
 bot.setGreetingText("Hey there! My name is, Irish. I am a student-friendly chatbot whose sole-purpose is to be of help to all the students that does not have internet for their homeworks/activities.")
 bot.setGetStartedButton((payload, chat) => {
   chat.getUserProfile().then(user => {
@@ -28,7 +31,6 @@ bot.setGetStartedButton((payload, chat) => {
       text: `Hello ${user.first_name}! What would you like to do?`,
       quickReplies: commands.names
     });
-    bot.deletePersistentMenu();
   });
 });
 
@@ -50,7 +52,7 @@ bot.on("referral", (payload, chat) => {
 
 bot.on('quick_reply', (payload, chat) => {
   console.log(payload)
-  chat.say(`Received ${payload.quick_reply}`)
+  chat.say(`Received ${payload.message.quick_reply}`)
 });
 
 bot.start(process.env.PORT || 8080);
