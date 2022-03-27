@@ -18,6 +18,7 @@ bot.setGetStartedButton((payload, chat) => {
     chat.say(`Hello ${user.first_name}! What would you like to do?`);
   });
 });
+bot.deletePersistentMenu();
 
 // When user starts a convo using "Send to messenger" button
 bot.on("authentication", (payload, chat) => {
