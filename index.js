@@ -43,7 +43,7 @@ bot.on("authentication", (payload, chat) => {
 bot.on("referral", (payload, chat) => {
   console.log(payload);
   
-  let senderID = payload.message.sender.id;
+  let senderID = payload.sender.id;
   let convoRecords = convoUtils.openConvoRecords();
   
   if(convoRecords[senderID] !== undefined) {
@@ -60,7 +60,7 @@ bot.on("referral", (payload, chat) => {
 });
 
 bot.on("message", (payload, chat) => {
-  let senderID = payload.message.sender.id;
+  let senderID = payload.sender.id;
   let convoRecords = convoUtils.openConvoRecords();
   
   // Ignore quick replies
@@ -75,7 +75,7 @@ bot.on("message", (payload, chat) => {
 bot.on('quick_reply', (payload, chat) => {
   console.log(payload);
   
-  let senderID = payload.message.sender.id;
+  let senderID = payload.sender.id;
   let convoRecords = convoUtils.openConvoRecords();
   
   if(payload.message.quick_reply === "PAYLOAD_QR_EXITTHISCOMMAND") {
