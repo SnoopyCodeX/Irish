@@ -40,10 +40,22 @@ bot.on("referral", (payload, chat) => {
     chat.say({
       text: `Welcome back, ${user.first_name}! What would you like to do?`,
       buttons: [
-        {type: "payload", title: "Show all commands", payload: "SHOW_COMMANDS"}
+        {type: "postback", title: "Show all commands", payload: "SHOW_COMMANDS"}
       ]
     });
   });
+});
+
+bot.on("postback:SHOW_COMMANDS", (payload, chat) => {
+  let message = "Available Commands:\n\n";
+  let counter = 1;
+  
+  for(let cmd in commands) {
+    message += `${counter++}. ${commands[cmd].description}\n`;
+    message += `⟩ Usage: ${commands[cmd].usage}\n\n`;
+  }
+  
+  chat.say(message);
 });
 
 bot.hear(/\b(Show all commands)\b/gim, (payload, chat) => {
@@ -51,7 +63,7 @@ bot.hear(/\b(Show all commands)\b/gim, (payload, chat) => {
   let counter = 1;
   
   for(let cmd in commands) {
-    message += `${counter++}. ${commands[cmd].description}\n\n`;
+    message += `${counter++}. ${commands[cmd].description}\n`;
     message += `⟩ Usage: ${commands[cmd].usage}\n\n`;
   }
   
