@@ -19,27 +19,19 @@ bot.setGetStartedButton((payload, chat) => {
   });
 });
 
-bot.setPersistentMenu([
-  {
-    title: 'Search Image',
-    type: 'postback',
-    payload: 'SEARCH_IMAGE'
-  },
-  {
-    title: 'Google Search',
-    type: 'postback',
-    payload: 'SEARCH_GOOGLE'
-  },
-  {
-    title: 'Solve Math',
-    type: 'postback',
-    payload: 'SOLVE_MATH'
-  }
-], disableInput);
-
 // When user starts a convo using "Send to messenger" button
 bot.on("authentication", (payload, chat) => {
   console.log(payload);
+})
+
+bot.on("referral", (payload, chat) => {
+  console.log(payload);
+  chat.say("Welcome back! What would you like to do today?");
+})
+
+bot.hear("test", (payload, chat) => {
+  console.log(payload);
+  chat.say("Received a test message!");
 })
 
 /*
