@@ -15,7 +15,15 @@ const disableInput = false;
 bot.setGreetingText("Hey there! My name is, Irish.")
 bot.setGetStartedButton((payload, chat) => {
   chat.getUserProfile().then(user => {
-    chat.say(`Hello ${user.first_name}! What would you like to do?`);
+    chat.say({
+      text: `Hello ${user.first_name}! What would you like to do?`,
+      quickReplies: [
+        'Solve Math', 
+        'Search Google',
+        'Search Wiki',
+        'Search Image'
+      ]
+    });
     bot.deletePersistentMenu();
   });
 });
@@ -35,7 +43,13 @@ bot.hear("test", (payload, chat) => {
   console.log(payload);
   bot.deletePersistentMenu();
   chat.say("Received a test message!");
-})
+});
+
+bot.on('quick_reply', (payload, chat, data) => {
+  console.log(payload);
+  console.log(data);
+  chat.say('Received quick reply');
+});
 
 /*
 // User clicked "Solve Math" button
