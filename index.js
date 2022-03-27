@@ -18,7 +18,7 @@ bot.setGetStartedButton((payload, chat) => {
     chat.say({
       text: `Hello ${user.first_name}! What would you like to do?`,
       buttons: [
-        {type: "payload", title: "Show all commands", payload: "SHOW_COMMANDS"}
+        {type: "postback", title: "Show all commands", payload: "SHOW_COMMANDS"}
       ]
     });
   });
