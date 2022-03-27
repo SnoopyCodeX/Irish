@@ -27,11 +27,13 @@ bot.on("authentication", (payload, chat) => {
 
 bot.on("referral", (payload, chat) => {
   console.log(payload);
+  bot.deletePersistentMenu();
   chat.say("Welcome back! What would you like to do today?");
 })
 
 bot.hear("test", (payload, chat) => {
   console.log(payload);
+  bot.deletePersistentMenu();
   chat.say("Received a test message!");
 })
 
