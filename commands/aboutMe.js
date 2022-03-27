@@ -1,11 +1,10 @@
-const callback = (payload, chat) => {
-  chat.say({
-    text:'I am a chatbot',
-    quickReplies: ['Exit this command']
-  });
+const callback = (payload, chat, data) => {
+  chat.say('I am a chatbot');
 };
 
 module.exports = {
   callback,
-  name: "About Me"
+  regex: /\b(About me)\b/gim,
+  description: "Shows information about me",
+  usage: "Send: 'About me'"
 };
