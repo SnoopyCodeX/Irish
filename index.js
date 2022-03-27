@@ -16,9 +16,9 @@ bot.setGreetingText("Hey there! My name is, Irish.")
 bot.setGetStartedButton((payload, chat) => {
   chat.getUserProfile().then(user => {
     chat.say(`Hello ${user.first_name}! What would you like to do?`);
+    bot.deletePersistentMenu();
   });
 });
-bot.deletePersistentMenu();
 
 // When user starts a convo using "Send to messenger" button
 bot.on("authentication", (payload, chat) => {
