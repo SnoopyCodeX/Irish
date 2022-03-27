@@ -23,7 +23,7 @@ const bot = new BootBot({
 
 bot.deletePersistentMenu();
 bot.deleteGetStartedButton();
-
+/*
 bot.setGreetingText("Hey there! My name is, Irish. I am a student-friendly chatbot whose sole-purpose is to be of help to all the students that does not have internet for their homeworks/activities.")
 bot.setGetStartedButton((payload, chat) => {
   chat.getUserProfile().then(user => {
@@ -32,7 +32,7 @@ bot.setGetStartedButton((payload, chat) => {
       quickReplies: commands.names
     });
   });
-});
+});*/
 
 // When user starts a convo using "Send to messenger" button
 bot.on("authentication", (payload, chat) => {
