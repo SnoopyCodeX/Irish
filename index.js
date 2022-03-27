@@ -6,7 +6,7 @@ const commands = require("./commands/all");
 commands.names = [
   'About Me',
   'Solve Math',
-  'Search Image'
+  'Search Image',
   'Search Google',
   'Search Wiki',
   'Define Word'
